@@ -35,15 +35,12 @@
             this.btnCargarArchivo = new System.Windows.Forms.Button();
             this.btnResetear = new System.Windows.Forms.Button();
             this.tablaSimbolos = new System.Windows.Forms.DataGridView();
-            this.tablaLiterales = new System.Windows.Forms.DataGridView();
             this.tablaDummys = new System.Windows.Forms.DataGridView();
             this.tablaErrores = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tablaLiterales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablaDummys)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablaErrores)).BeginInit();
             this.SuspendLayout();
@@ -118,19 +115,10 @@
             this.tablaSimbolos.TabIndex = 9;
             this.tablaSimbolos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaSimbolos_CellContentClick);
             // 
-            // tablaLiterales
-            // 
-            this.tablaLiterales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaLiterales.Location = new System.Drawing.Point(555, 227);
-            this.tablaLiterales.Name = "tablaLiterales";
-            this.tablaLiterales.Size = new System.Drawing.Size(649, 166);
-            this.tablaLiterales.TabIndex = 10;
-            this.tablaLiterales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaLiterales_CellContentClick);
-            // 
             // tablaDummys
             // 
             this.tablaDummys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaDummys.Location = new System.Drawing.Point(555, 425);
+            this.tablaDummys.Location = new System.Drawing.Point(555, 242);
             this.tablaDummys.Name = "tablaDummys";
             this.tablaDummys.Size = new System.Drawing.Size(649, 167);
             this.tablaDummys.TabIndex = 11;
@@ -139,7 +127,7 @@
             // tablaErrores
             // 
             this.tablaErrores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaErrores.Location = new System.Drawing.Point(555, 621);
+            this.tablaErrores.Location = new System.Drawing.Point(555, 444);
             this.tablaErrores.Name = "tablaErrores";
             this.tablaErrores.Size = new System.Drawing.Size(649, 167);
             this.tablaErrores.TabIndex = 12;
@@ -153,19 +141,10 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "Tabla de Símbolos";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(552, 211);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Tabla de Literales";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(552, 409);
+            this.label4.Location = new System.Drawing.Point(556, 212);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 13);
             this.label4.TabIndex = 15;
@@ -174,7 +153,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(552, 605);
+            this.label5.Location = new System.Drawing.Point(556, 428);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(85, 13);
             this.label5.TabIndex = 16;
@@ -184,14 +163,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1231, 805);
+            this.ClientSize = new System.Drawing.Size(1231, 749);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tablaErrores);
             this.Controls.Add(this.tablaDummys);
-            this.Controls.Add(this.tablaLiterales);
             this.Controls.Add(this.tablaSimbolos);
             this.Controls.Add(this.btnResetear);
             this.Controls.Add(this.btnCargarArchivo);
@@ -203,7 +180,6 @@
             this.Text = "Compilador";
             this.Load += new System.EventHandler(this.FormCompilador_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tablaLiterales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablaDummys)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablaErrores)).EndInit();
             this.ResumeLayout(false);
@@ -220,11 +196,9 @@
         private System.Windows.Forms.Button btnCargarArchivo;
         private System.Windows.Forms.Button btnResetear;
         private System.Windows.Forms.DataGridView tablaSimbolos;
-        private System.Windows.Forms.DataGridView tablaLiterales;
         private System.Windows.Forms.DataGridView tablaDummys;
         private System.Windows.Forms.DataGridView tablaErrores;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
     }

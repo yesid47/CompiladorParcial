@@ -54,5 +54,10 @@ namespace CompiladorV1.ManejadorErrores
         {
             return ObtenerTodosErrores().Count > 0;
         }
+
+        public static void Limpiar()
+        {
+            errores.Clear();
+        }
     }
 }

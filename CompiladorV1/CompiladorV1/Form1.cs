@@ -11,11 +11,9 @@ namespace Compilador
 {
     public partial class FormCompilador : Form
     {
-        //private Cache archivo;
         public FormCompilador()
         {
             InitializeComponent();
-            //archivo = Cache.ObtenerInstancia();
         }
 
         private void BtnCargarArchivo_Click(object sender, EventArgs e)
@@ -42,13 +40,10 @@ namespace Compilador
 
         private void BtnCompilar_Click(object sender, EventArgs e)
         {
-            //TablaSimbolos.ObtenerTablaSimbolos();
-            //TablaSimbolos.Limpiar();
-            //TablaDummy.ObtenerTodosSimbolos();
-            //TablaDummy.Limpiar();
-            //TablaDummys.ObtenerTablaDummys().Limpiar();
-            //TablaLiterales.ObtenerTablaLiterales().Limpiar();
-            //GestorErrores.ObtenerTodosErrores();
+            TablaSimbolos.Limpiar();
+            TablaDummy.Limpiar();
+            GestorErrores.Limpiar();
+            
 
             textBoxReader.Clear();
             LlenarTextBoxReader();
@@ -59,15 +54,9 @@ namespace Compilador
             while (analizador.Analizar().Lexema != "@EOF@") {
             }
 
-                //componente.ToString();
-
-            //text
-
                 tablaSimbolos.DataSource = TablaSimbolos.ObtenerTodosSimbolos();
-                
-                //tablaLiterales.DataSource = TablaLiterales.ObtenerTablaLiterales().ObtenerLiterales();
                 tablaDummys.DataSource = TablaDummy.ObtenerTodosSimbolos();
-                //tablaErrores.DataSource = GestorErrores.ObtenerTodosErrores();*
+                tablaErrores.DataSource = GestorErrores.ObtenerTodosErrores();
             
 
         }

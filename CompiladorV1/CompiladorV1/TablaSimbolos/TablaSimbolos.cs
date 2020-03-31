@@ -9,18 +9,12 @@ namespace CompiladorV1.TablaSimbolos
 {
     public class TablaSimbolos
     {
-        private static TablaSimbolos instancia = new TablaSimbolos();
         private static Dictionary<String, List<ComponenteLexico>> simbolos
             = new Dictionary<string, List<ComponenteLexico>>();
 
 
         private TablaSimbolos()
         {
-        }
-
-        public static TablaSimbolos ObtenerTablaSimbolos()
-        {
-            return instancia;
         }
 
         private static List<ComponenteLexico> ObtenerSimbolos(string clave)

@@ -20,10 +20,5 @@ namespace CompiladorV1.Cache
         public Linea()
         {
         }
-
-        public static Linea Crear(int numero, String contenido)
-        {
-            return new Linea(numero, contenido);
-        }
     }
 }

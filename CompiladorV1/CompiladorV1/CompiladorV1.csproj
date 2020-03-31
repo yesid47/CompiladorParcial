@@ -49,8 +49,6 @@
     <Compile Include="AnalisisLexico\AnalizadorLexico.cs" />
     <Compile Include="Cache\Cache.cs" />
     <Compile Include="Cache\Linea.cs" />
-    <Compile Include="clases\Entrada.cs" />
-    <Compile Include="clases\Linea2.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

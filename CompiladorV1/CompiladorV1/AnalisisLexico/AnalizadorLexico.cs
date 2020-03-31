@@ -21,7 +21,7 @@ namespace CompiladorV1.AnalisisLexico
         public AnalizadorLexico()
         {
             CargarNuevaLinea();
-            numeroLineaActual = 0;
+            //numeroLineaActual;
         }
 
         private void CargarNuevaLinea()
@@ -45,18 +45,19 @@ namespace CompiladorV1.AnalisisLexico
 
         private void LeerSiguienteCaracter()
         {
+            puntero = puntero + 1;
             if (lineaActual.Contenido.Equals("@EOF@"))
             {
                 caracterActual = lineaActual.Contenido;
             }
-            else if(puntero >= lineaActual.Contenido.Length)
+            else if(puntero-1 >= lineaActual.Contenido.Length)
             {
                 caracterActual = "@FL@";
             }
             else
             {
-                caracterActual = lineaActual.Contenido.Substring(puntero, 1);
-                puntero = puntero + 1;
+                caracterActual = lineaActual.Contenido.Substring(puntero-1, 1);
+               // puntero = puntero + 1;
             }
             
         }
@@ -74,7 +75,7 @@ namespace CompiladorV1.AnalisisLexico
         private void DevorarEspaciosBlanco()
         {
 
-            while (caracterActual.Equals(""))
+            while (caracterActual.Equals(" "))
             {
                 LeerSiguienteCaracter();
             }
@@ -201,7 +202,7 @@ namespace CompiladorV1.AnalisisLexico
                         estadoActual = 1;
                         concatenarLexema();
                     }
-                    else if (estadoActual.Equals(","))
+                    else if (caracterActual.Equals(","))
                     {
                         estadoActual = 2;
                         concatenarLexema();
@@ -222,21 +223,21 @@ namespace CompiladorV1.AnalisisLexico
                     }
                     else
                     {
+                        concatenarLexema();
                         estadoActual = 17;
                     }
                 }
                 else if (estadoActual==14)
                 {
                     continuarAnalisis = false;
-                   // DevolverPuntero();
+                    DevolverPuntero();
                     componenteLexico = new ComponenteLexico();
                     componenteLexico.Categoria = Categoria.ENTERO;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero-1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
 
-                    //TablaSimbolos.TablaSimbolos.Agregar(componenteLexico);
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
 
                 }
@@ -262,8 +263,8 @@ namespace CompiladorV1.AnalisisLexico
                     componenteLexico.Categoria = Categoria.DECIMAL;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero ;
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
 
@@ -281,16 +282,95 @@ namespace CompiladorV1.AnalisisLexico
                     }
                 }
 
+                else if (estadoActual == 5)
+                {
+                    continuarAnalisis = false;
+                    componenteLexico = new ComponenteLexico();
+                    componenteLexico.Categoria = Categoria.SUMA;
+                    componenteLexico.Lexema = lexema;
+                    componenteLexico.NumeroLinea = numeroLineaActual;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
+
+                    TablaMaestra.SincronizarSimbolo(componenteLexico);
+                }
+
+                else if (estadoActual == 6)
+                {
+                    continuarAnalisis = false;
+                    componenteLexico = new ComponenteLexico();
+                    componenteLexico.Categoria = Categoria.RESTA;
+                    componenteLexico.Lexema = lexema;
+                    componenteLexico.NumeroLinea = numeroLineaActual;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
+
+                    TablaMaestra.SincronizarSimbolo(componenteLexico);
+                }
+
+                else if (estadoActual == 7)
+                {
+                    continuarAnalisis = false;
+                    componenteLexico = new ComponenteLexico();
+                    componenteLexico.Categoria = Categoria.MULTIPLICACION;
+                    componenteLexico.Lexema = lexema;
+                    componenteLexico.NumeroLinea = numeroLineaActual;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
+
+                    TablaMaestra.SincronizarSimbolo(componenteLexico);
+                }
+
+                else if (estadoActual == 9)
+                {
+                    continuarAnalisis = false;
+                    componenteLexico = new ComponenteLexico();
+                    componenteLexico.Categoria = Categoria.MODULO;
+                    componenteLexico.Lexema = lexema;
+                    componenteLexico.NumeroLinea = numeroLineaActual;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
+
+                    TablaMaestra.SincronizarSimbolo(componenteLexico);
+                }
+
+                else if (estadoActual == 10)
+                {
+                    continuarAnalisis = false;
+                    componenteLexico = new ComponenteLexico();
+                    componenteLexico.Categoria = Categoria.PARENTESIS_ABRE;
+                    componenteLexico.Lexema = lexema;
+                    componenteLexico.NumeroLinea = numeroLineaActual;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
+
+                    TablaMaestra.SincronizarSimbolo(componenteLexico);
+                }
+
+                else if (estadoActual == 11)
+                {
+                    continuarAnalisis = false;
+                    componenteLexico = new ComponenteLexico();
+                    componenteLexico.Categoria = Categoria.PARENTESIS_CIERRA;
+                    componenteLexico.Lexema = lexema;
+                    componenteLexico.NumeroLinea = numeroLineaActual;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
+
+                    TablaMaestra.SincronizarSimbolo(componenteLexico);
+                }
+
+
                 else if (estadoActual == 16)
                 {
                     continuarAnalisis = false;
-                    //DevolverPuntero();
+                    DevolverPuntero();
                     componenteLexico = new ComponenteLexico();
                     componenteLexico.Categoria = Categoria.IDENTIFICADOR;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
 
                 }
@@ -321,8 +401,8 @@ namespace CompiladorV1.AnalisisLexico
                     componenteLexico.Categoria = Categoria.DIVISION;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero+1;
 
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
 
@@ -415,13 +495,12 @@ namespace CompiladorV1.AnalisisLexico
                 else if (estadoActual==23)
                 {
                     continuarAnalisis = false;
-                    //DevolverPuntero();
                     componenteLexico = new ComponenteLexico();
                     componenteLexico.Categoria = Categoria.DIFERENTE;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
 
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
@@ -429,13 +508,12 @@ namespace CompiladorV1.AnalisisLexico
                 else if (estadoActual == 24)
                 {
                     continuarAnalisis = false;
-                    //DevolverPuntero();
                     componenteLexico = new ComponenteLexico();
                     componenteLexico.Categoria = Categoria.MAYOR_O_IGUAL_QUE;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
 
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
@@ -448,8 +526,10 @@ namespace CompiladorV1.AnalisisLexico
                     componenteLexico.Categoria = Categoria.MENOR_QUE;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
+
+                    TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
 
                 else if (estadoActual==21)
@@ -462,20 +542,20 @@ namespace CompiladorV1.AnalisisLexico
                     }
                     else
                     {
-                        concatenarLexema();
                         estadoActual = 27;
                     }
                 }
                 else if (estadoActual==26)
                 {
                     continuarAnalisis = false;
-                    //DevolverPuntero();
                     componenteLexico = new ComponenteLexico();
                     componenteLexico.Categoria = Categoria.MAYOR_O_IGUAL_QUE;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
+
+                    TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
 
                 else if (estadoActual==27)
@@ -486,8 +566,8 @@ namespace CompiladorV1.AnalisisLexico
                     componenteLexico.Categoria = Categoria.MAYOR_QUE;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
 
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
@@ -502,6 +582,7 @@ namespace CompiladorV1.AnalisisLexico
                     }
                     else
                     {
+                        concatenarLexema();
                         estadoActual=29;
                     }
 
@@ -510,13 +591,12 @@ namespace CompiladorV1.AnalisisLexico
                 else if (estadoActual == 28)
                 {
                     continuarAnalisis = false;
-                    //DevolverPuntero();
                     componenteLexico = new ComponenteLexico();
                     componenteLexico.Categoria = Categoria.ASIGNACION;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
 
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
@@ -524,13 +604,12 @@ namespace CompiladorV1.AnalisisLexico
                 else if (estadoActual == 19)
                 {
                     continuarAnalisis = false;
-                    //DevolverPuntero();
                     componenteLexico = new ComponenteLexico();
                     componenteLexico.Categoria = Categoria.IGUAL_QUE;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
 
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
@@ -545,6 +624,7 @@ namespace CompiladorV1.AnalisisLexico
                     }
                     else
                     {
+                        concatenarLexema();
                         estadoActual = 32;
                     }
                 }
@@ -552,24 +632,62 @@ namespace CompiladorV1.AnalisisLexico
                 else if (estadoActual == 31)
                 {
                     continuarAnalisis = false;
-                    //DevolverPuntero();
                     componenteLexico = new ComponenteLexico();
                     componenteLexico.Categoria = Categoria.DIFERENTE;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
 
                 else if (estadoActual == 32)
                 {
-                    //Pendiente Controlar estados de error
+                    DevolverPuntero();
+                    continuarAnalisis = false;
+
+                    Error error = Error.CrearErrorLexico(lexema, Categoria.DECIMAL, numeroLineaActual,
+                        puntero - lexema.Length, puntero,
+                        "Caracter no valido",
+                        "Leí \"" + caracterActual + "\" y esperaba un '='",
+                        "Asegúrese que el caracter que se reciba despues de ! sea un =");
+
+                    GestorErrores.Reportar(error);
+
+                    componenteLexico = new ComponenteLexico();
+                    componenteLexico.Categoria = Categoria.DECIMAL;
+                    componenteLexico.Lexema = lexema + "0";
+                    componenteLexico.NumeroLinea = numeroLineaActual;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
+                    componenteLexico.Tipo = TipoComponente.DUMMY;
+
+                    TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
 
                 else if (estadoActual == 29)
                 {
-                    //Pendiente Controlar estados de error
+
+                    DevolverPuntero();
+                    continuarAnalisis = false;
+                    
+                    Error error = Error.CrearErrorLexico(lexema, Categoria.CARACTER_NO_VALIDO, numeroLineaActual,
+                        puntero - lexema.Length, puntero,
+                        "Caracter no valido",
+                        "Leí \"" + caracterActual + "\" y esperaba un '='",
+                        "Asegúrese que el caracter que se reciba despues de ! sea un =");
+
+                    GestorErrores.Reportar(error);
+
+                    componenteLexico = new ComponenteLexico();
+                    componenteLexico.Categoria = Categoria.DECIMAL;
+                    componenteLexico.Lexema = lexema + "0";
+                    componenteLexico.NumeroLinea = numeroLineaActual;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
+                    componenteLexico.Tipo = TipoComponente.DUMMY;
+
+                    TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
 
                 else if (estadoActual == 17)
@@ -578,17 +696,19 @@ namespace CompiladorV1.AnalisisLexico
                     continuarAnalisis = false;
 
                     Error error = Error.CrearErrorLexico(lexema, Categoria.DECIMAL, numeroLineaActual, 
-                        puntero - lexema.Length, puntero - 1, 
+                        puntero - lexema.Length, puntero, 
                         "Número decimal no valido", 
                         "Leí \"" + caracterActual + "\" y esperaba un digíto del 0 al 9",
                         "Asegúrese que el caracter que se reciba sea un dígito del 0 al 9");
+
+                    GestorErrores.Reportar(error);
 
                     componenteLexico = new ComponenteLexico();
                     componenteLexico.Categoria = Categoria.DECIMAL;
                     componenteLexico.Lexema = lexema+ "0";
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero - lexema.Length;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero - lexema.Length+1;
+                    componenteLexico.PosicionFinal = puntero;
                     componenteLexico.Tipo = TipoComponente.DUMMY;
 
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
@@ -597,7 +717,7 @@ namespace CompiladorV1.AnalisisLexico
                 else if (estadoActual == 18)
                 {
                     Error error = Error.CrearErrorLexico(caracterActual, Categoria.CARACTER_NO_VALIDO, numeroLineaActual,
-                        puntero-1, puntero - 1,
+                        puntero, puntero,
                         "Caracter no reconocido por el lenguaje",
                         "Leí \"" + caracterActual + "\"",
                         "Asegúrese que el caracter que se reciba sea valido dentro del lenguaje");
@@ -617,18 +737,13 @@ namespace CompiladorV1.AnalisisLexico
                     componenteLexico.Categoria = Categoria.FIN_ARCHIVO;
                     componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
-                    componenteLexico.PosicionInicial = puntero -1;
-                    componenteLexico.PosicionFinal = puntero - 1;
+                    componenteLexico.PosicionInicial = puntero;
+                    componenteLexico.PosicionFinal = puntero ;
 
                     TablaMaestra.SincronizarSimbolo(componenteLexico);
                 }
 
             }
-
-            /*if (caracterActual != "@EOF@")
-            {
-                TablaMaestra.SincronizarSimbolo(componenteLexico);
-            }*/
 
             return componenteLexico;
 

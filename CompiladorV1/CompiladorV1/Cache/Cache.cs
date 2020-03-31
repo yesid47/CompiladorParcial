@@ -13,13 +13,6 @@ namespace CompiladorV1.Cache
         private static List<Linea> lineas = new List<Linea>();
 
 
-        /*private static Cache instancia = new Cache();
-        private Cache() { }
-        public static Cache ObtenerInstancia()
-        {
-            return instancia;
-        }*/
-
         public static void AgregarLinea(String contenido)
         {
             if (contenido != null)
@@ -94,7 +87,7 @@ namespace CompiladorV1.Cache
                 openFileDialog.InitialDirectory = "c:\\";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
-                int contador = 2;
+                int contador = 1;
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
 
@@ -108,7 +101,8 @@ namespace CompiladorV1.Cache
                     {
                         while ((contenidoLinea = reader.ReadLine()) != null)
                         {
-                            lineas.Add(Linea.Crear(contador, contenidoLinea));
+                            //lineas.Add(Linea.Crear(contador, contenidoLinea));
+                            AgregarLinea(contenidoLinea);
                             contador++;
                         }
                     }

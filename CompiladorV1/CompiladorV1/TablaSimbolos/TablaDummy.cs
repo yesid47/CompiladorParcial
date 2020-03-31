@@ -14,7 +14,7 @@ namespace CompiladorV1.TablaSimbolos
 
         private static List<ComponenteLexico> ObtenerSimbolos(string clave)
         {
-            if (simbolos.ContainsKey(clave))
+            if (!simbolos.ContainsKey(clave))
             {
                 simbolos.Add(clave, new List<ComponenteLexico>());
             }
