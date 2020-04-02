@@ -31,7 +31,12 @@ namespace CompiladorV1.TablaSimbolos
         {
            if(componente != null && !componente.Lexema.Equals("") && componente.Tipo.Equals(TipoComponente.SIMBOLO))
             {
-                ObtenerSimbolos(componente.Lexema).Add(componente);
+                Console.WriteLine(componente.Lexema);
+                if (!componente.Lexema.Contains("//"))
+                {
+                    ObtenerSimbolos(componente.Lexema).Add(componente);
+                }
+                
             }
         }
 
