@@ -64,7 +64,10 @@ namespace CompiladorV1.AnalisisLexico
 
         private void concatenarLexema()
         {
+            Console.WriteLine("caracter actual " + caracterActual);
+
             lexema = lexema + caracterActual;
+            Console.WriteLine("lexema actual" + caracterActual);
         }
 
         private void limpiarLexema()
@@ -223,6 +226,7 @@ namespace CompiladorV1.AnalisisLexico
                     }
                     else
                     {
+                        Console.WriteLine("error " + caracterActual);
                         concatenarLexema();
                         estadoActual = 17;
                     }
@@ -705,7 +709,7 @@ namespace CompiladorV1.AnalisisLexico
 
                     componenteLexico = new ComponenteLexico();
                     componenteLexico.Categoria = Categoria.DECIMAL;
-                    componenteLexico.Lexema = lexema+ "0";
+                    componenteLexico.Lexema = lexema;
                     componenteLexico.NumeroLinea = numeroLineaActual;
                     componenteLexico.PosicionInicial = puntero - lexema.Length+1;
                     componenteLexico.PosicionFinal = puntero;
